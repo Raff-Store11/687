@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Orbits Engine — Mockup</title>
+  <style>
+    :root{
+      --bg:#000;
+      --white:#ffffff;
+      --muted:#f2f2f2;
+      --accent-start:#d8b4fe;
+      --accent-end:#a78bfa;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--white);
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    .logo{
+      margin-top:46px;
+      width:140px;
+      height:140px;
+      background:rgba(255,255,255,0.04);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:6px;
+    }
+    .logo img{max-width:150%; max-height:400%; display:block}
+
+    h2{
+      margin:22px 0 12px;
+      font-size:22px;
+      font-weight:600;
+      letter-spacing:3px;
+      color:var(--white);
+    }
+
+    .form-box{
+      width:92%;
+      max-width:420px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      margin-top:6px;
+    }
+    .input,
+    .select{
+      width:100%;
+      padding:14px 18px;
+      margin:12px 0;
+      border-radius:22px;
+      background:var(--muted);
+      border:none;
+      color:#111;
+      font-size:20px;
+      text-align:center;
+      outline:none;
+    }
+    .select{appearance:none}
+
+    .send-btn{
+      margin-top:12px;
+      background: linear-gradient(90deg,var(--accent-start),var(--accent-end));
+      color:#07060a;
+      border:none;
+      padding:14px 48px;
+      border-radius:36px;
+      font-size:16px;
+      font-weight:800;
+      cursor:pointer;
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      box-shadow: 0 10px 20px rgba(167,139,250,0.12);
+      transition: transform .12s ease, opacity .12s ease;
+    }
+    .send-btn:active{transform:scale(.995)}
+    .send-btn[disabled]{opacity:.6; cursor:default; transform:none}
+
+    .popup{
+      position:fixed;
+      inset:0;
+      background:#000;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:9999;
+      visibility:hidden;
+      opacity:0;
+      transition:opacity .12s ease, visibility .12s;
+      text-align:center;
+      padding:24px;
+    }
+    .popup.show{visibility:visible; opacity:1}
+    .popup .inner{
+      color:var(--white);
+    }
+    .popup h1{
+      margin:0;
+      font-size:28px;
+      letter-spacing:1px;
+      font-weight:800;
+    }
+    .popup p{
+      margin:8px 0 0;
+      font-size:18px;
+      opacity:0.95;
+    }
+    .note{margin-top:18px; font-size:12px; opacity:0.6}
+
+    /* Style tambahan untuk form login */
+    .login-box {
+      width: 92%;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 6px;
+    }
+    .login-input {
+      width: 100%;
+      padding: 14px 18px;
+      margin: 12px 0;
+      border-radius: 22px;
+      background: var(--muted);
+      border: none;
+      color: #111;
+      font-size: 16px;
+      text-align: center;
+      outline: none;
+    }
+    .login-btn {
+      margin-top: 12px;
+      background: linear-gradient(90deg,var(--accent-start),var(--accent-end));
+      color: #07060a;
+      border: none;
+      padding: 14px 48px;
+      border-radius: 36px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor:pointer;
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      box-shadow: 0 10px 20px rgba(167,139,250,0.12);
+      transition: transform .12s ease, opacity .12s ease;
+    }
+    .login-btn:active{transform:scale(.995)}
+    .login-btn[disabled]{opacity:.6; cursor:default; transform:none}
+
+    @media (max-width:420px){
+      .logo{width:120px;height:120px}
+      .popup h1{font-size:22px}
+      .popup p{font-size:80px}
+    }
+  </style>
+</head>
+<body>
+  <div class="logo" aria-hidden="true">
+    <img src="20250918_005108.jpg" alt="logo">
+  </div>
+
+  <h2 id="mainTitle">Login</h2>
+
+  <!-- Form Login -->
+  <div id="loginBox" class="login-box" role="form" aria-label="Login form">
+    <input id="username" class="login-input" type="text" placeholder="Username" value="">
+    <input id="password" class="login-input" type="password" placeholder="Password" value="">
+    <button id="loginBtn" class="login-btn" type="button">
+      <span>▶</span><span style="letter-spacing:1px">LOGIN</span>
+    </button>
+  </div>
+
+  <!-- Menu Attack (Awalnya tersembunyi) -->
+  <div id="attackMenu" class="form-box" role="form" aria-label="Attack menu mockup" style="display:none;">
+    <input id="phone" class="input" type="text" placeholder="Target Number" value="">
+    <select id="method" class="select" aria-label="Metode">
+      <option value="" disabled selected>Select Menu</option>
+      <option>Crash Iphone</option>
+      <option>Delay Hard</option>
+      <option>Crash Infinity</option>
+      <option>Blank Screen</option>
+      <option>Bulldozer</option>
+    </select>
+    <button id="sendBtn" class="send-btn" type="button">
+      <span>▶</span><span style="letter-spacing:1px">SEND BUG</span>
+    </button>
+  </div>
+
+  <!-- popup -->
+  <div id="popup" class="popup" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="inner">
+      <h1 id="title">BUG SUCCES✅</h1>
+      <p id="sub">ATTACKER WHAT'SAPP 62xxxx</p>
+      <div class="note">Ketuk layar untuk menutup</div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      // Elemen-elemen Login
+      const loginBox = document.getElementById('loginBox');
+      const usernameInput = document.getElementById('username');
+      const passwordInput = document.getElementById('password');
+      const loginBtn = document.getElementById('loginBtn');
+      const mainTitle = document.getElementById('mainTitle');
+
+      // Elemen-elemen Attack Menu
+      const attackMenu = document.getElementById('attackMenu');
+      const btn = document.getElementById('sendBtn');
+      const phone = document.getElementById('phone');
+      const popup = document.getElementById('popup');
+      const sub = document.getElementById('sub');
+
+      // Fungsi untuk normalisasi nomor telepon
+      function normalizeTo62(raw){
+        if(!raw) return '62xxxx';
+        const d = raw.toString().replace(/\D/g,'');
+        if(!d) return '62xxxx';
+        if(d.startsWith('62')) return d;
+        if(d.startsWith('0')) return '62' + d.slice(1);
+        if(d.startsWith('8')) return '62' + d;
+        return d;
+      }
+
+      // Event listener untuk tombol Login
+      loginBtn.addEventListener('click', () => {
+        const username = usernameInput.value;
+        const password = passwordInput.value;
+
+        // Kondisi login (username dan password harus "Raff1")
+        if (username === 'Attacker' && password === 'Attacker123') {
+          // Sembunyikan form login
+          loginBox.style.display = 'none';
+          // Tampilkan menu attack
+          attackMenu.style.display = 'flex';
+          // Ubah judul
+          mainTitle.textContent = 'Attack Menu';
+        } else {
+          alert('Login gagal. Coba lagi.');
+        }
+      });
+
+      // Event listener untuk tombol SEND BUG
+      btn.addEventListener('click', () => {
+        btn.disabled = true;
+        btn.innerHTML = 'WAIT...';
+
+        setTimeout(() => {
+          const normalized = normalizeTo62(phone.value);
+          sub.textContent = "ATTACKER WHAT'SAPP " + normalized;
+          popup.classList.add('show');
+          popup.setAttribute('aria-hidden','false');
+        }, 3000);
+      });
+
+      // Event listener untuk menutup popup
+      popup.addEventListener('click', () => {
+        popup.classList.remove('show');
+        popup.setAttribute('aria-hidden','true');
+        btn.disabled = false;
+        btn.innerHTML = '<span>▶</span><span style="letter-spacing:1px">SEND BUG</span>';
+      });
+
+      // Event listener untuk menutup popup dengan tombol Esc
+      document.addEventListener('keydown', (e) => {
+        if(e.key === 'Escape' && popup.classList.contains('show')){
+          popup.classList.remove('show');
+          popup.setAttribute('aria-hidden','true');
+          btn.disabled = false;
+          btn.innerHTML = '<span>▶</span><span style="letter-spacing:1px">SEND BUG</span>';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
